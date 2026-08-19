@@ -10,16 +10,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Import your existing Python modules
-from rag_chain import get_rag_chain
-from ingest import add_document, delete_document
-
 app = FastAPI(title="Personal RAG Engine API")
 
-# Enable CORS for Next.js (running on localhost:3000)
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[frontend_url],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -80,6 +77,8 @@ def get_documents():
 # 2. Upload and index new documents
 @app.post("/api/documents/upload")
 async def upload_documents(files: List[UploadFile] = File(...)):
+    from ingest import add_document
+
     results = []
 
     for file in files:
@@ -112,6 +111,8 @@ async def upload_documents(files: List[UploadFile] = File(...)):
 # 3. Delete a document
 @app.delete("/api/documents/{filename}")
 def remove_document(filename: str):
+    from ingest import delete_document
+
     path = os.path.join(DOCS_FOLDER, filename)
     try:
         # Delete from vector store
@@ -130,6 +131,8 @@ def remove_document(filename: str):
 # 4. Stream RAG Chat Response
 @app.post("/api/chat")
 async def chat_stream(request: ChatRequest):
+    from rag_chain import get_rag_chain
+
     knowledge_base_files = [
         name
         for name in os.listdir(DOCS_FOLDER)
