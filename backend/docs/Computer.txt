@@ -1,0 +1,559 @@
+ComputerInfo
+
+
+WindowsBuildLabEx                                       : 26100.1.amd64fre.ge_release.240331-1435
+WindowsCurrentVersion                                   : 6.3
+WindowsEditionId                                        : CoreSingleLanguage
+WindowsInstallationType                                 : Client
+WindowsInstallDateFromRegistry                          : 14/09/2025 1:33:33 pm
+WindowsProductId                                        : 00356-24734-60025-AAOEM
+WindowsProductName                                      : Windows 10 Home Single Language
+WindowsRegisteredOrganization                           :
+WindowsRegisteredOwner                                  : meejhay
+WindowsSystemRoot                                       : C:\WINDOWS
+WindowsVersion                                          : 2009
+OSDisplayVersion                                        : 25H2
+BiosCharacteristics                                     : {7, 11, 12, 15...}
+BiosBIOSVersion                                         : {ACRSYS - 2, V1.33, INSYDE Corp. - 70314133}
+BiosBuildNumber                                         :
+BiosCaption                                             : V1.33
+BiosCodeSet                                             :
+BiosCurrentLanguage                                     :
+BiosDescription                                         : V1.33
+BiosEmbeddedControllerMajorVersion                      : 1
+BiosEmbeddedControllerMinorVersion                      : 29
+BiosFirmwareType                                        : Uefi
+BiosIdentificationCode                                  :
+BiosInstallableLanguages                                :
+BiosInstallDate                                         :
+BiosLanguageEdition                                     :
+BiosListOfLanguages                                     :
+BiosManufacturer                                        : Insyde Corp.
+BiosName                                                : V1.33
+BiosOtherTargetOS                                       :
+BiosPrimaryBIOS                                         : True
+BiosReleaseDate                                         : 09/06/2026 8:00:00 am
+BiosSeralNumber                                         : NXK6TSP00F405102B23400
+BiosSMBIOSBIOSVersion                                   : V1.33
+BiosSMBIOSMajorVersion                                  : 3
+BiosSMBIOSMinorVersion                                  : 3
+BiosSMBIOSPresent                                       : True
+BiosSoftwareElementState                                : Running
+BiosStatus                                              : OK
+BiosSystemBiosMajorVersion                              : 1
+BiosSystemBiosMinorVersion                              : 33
+BiosTargetOperatingSystem                               : 0
+BiosVersion                                             : ACRSYS - 2
+CsAdminPasswordStatus                                   : Unknown
+CsAutomaticManagedPagefile                              : True
+CsAutomaticResetBootOption                              : True
+CsAutomaticResetCapability                              : True
+CsBootOptionOnLimit                                     :
+CsBootOptionOnWatchDog                                  :
+CsBootROMSupported                                      : True
+CsBootStatus                                            :
+CsBootupState                                           : Normal boot
+CsCaption                                               : LEIGH
+CsChassisBootupState                                    : Safe
+CsChassisSKUNumber                                      :
+CsCurrentTimeZone                                       : 480
+CsDaylightInEffect                                      :
+CsDescription                                           : AT/AT COMPATIBLE
+CsDNSHostName                                           : Leigh
+CsDomain                                                : WORKGROUP
+CsDomainRole                                            : StandaloneWorkstation
+CsEnableDaylightSavingsTime                             : True
+CsFrontPanelResetStatus                                 : Unknown
+CsHypervisorPresent                                     : True
+CsInfraredSupported                                     : False
+CsInitialLoadInfo                                       :
+CsInstallDate                                           :
+CsKeyboardPasswordStatus                                : Unknown
+CsLastLoadInfo                                          :
+CsManufacturer                                          : Acer
+CsModel                                                 : Aspire A315-59
+CsName                                                  : LEIGH
+CsNetworkAdapters                                       : {Wi-Fi, Ethernet, Bluetooth Network Connection}
+CsNetworkServerModeEnabled                              : True
+CsNumberOfLogicalProcessors                             : 12
+CsNumberOfProcessors                                    : 1
+CsProcessors                                            : {12th Gen Intel(R) Core(TM) i5-1235U}
+CsOEMStringArray                                        : {Acer System, OemString2, Oemstring3}
+CsPartOfDomain                                          : False
+CsPauseAfterReset                                       : -1
+CsPCSystemType                                          : Mobile
+CsPCSystemTypeEx                                        : Mobile
+CsPowerManagementCapabilities                           :
+CsPowerManagementSupported                              :
+CsPowerOnPasswordStatus                                 : Unknown
+CsPowerState                                            : Unknown
+CsPowerSupplyState                                      : Safe
+CsPrimaryOwnerContact                                   :
+CsPrimaryOwnerName                                      : meejhay
+CsResetCapability                                       : Other
+CsResetCount                                            : -1
+CsResetLimit                                            : -1
+CsRoles                                                 : {LM_Workstation, LM_Server, SQLServer, NT}
+CsStatus                                                : OK
+CsSupportContactDescription                             :
+CsSystemFamily                                          : Aspire 3
+CsSystemSKUNumber                                       : 0000000000000000
+CsSystemType                                            : x64-based PC
+CsThermalState                                          : Safe
+CsTotalPhysicalMemory                                   : 8279613440
+CsPhyicallyInstalledMemory                              : 8388608
+CsUserName                                              : LEIGH\meejhay
+CsWakeUpType                                            : PowerSwitch
+CsWorkgroup                                             : WORKGROUP
+OsName                                                  : Microsoft Windows 11 Home Single Language
+OsType                                                  : WINNT
+OsOperatingSystemSKU                                    : 100
+OsVersion                                               : 10.0.26200
+OsCSDVersion                                            :
+OsBuildNumber                                           : 26200
+OsHotFixes                                              : {KB5100998, KB5054156, KB5101650, KB5120102}
+OsBootDevice                                            : \Device\HarddiskVolume1
+OsSystemDevice                                          : \Device\HarddiskVolume3
+OsSystemDirectory                                       : C:\WINDOWS\system32
+OsSystemDrive                                           : C:
+OsWindowsDirectory                                      : C:\WINDOWS
+OsCountryCode                                           : 1
+OsCurrentTimeZone                                       : 480
+OsLocaleID                                              : 0409
+OsLocale                                                : en-US
+OsLocalDateTime                                         : 12/08/2026 11:20:49 pm
+OsLastBootUpTime                                        : 07/08/2026 12:02:59 pm
+OsUptime                                                : 5.11:17:50.1141118
+OsBuildType                                             : Multiprocessor Free
+OsCodeSet                                               : 1252
+OsDataExecutionPreventionAvailable                      : True
+OsDataExecutionPrevention32BitApplications              : True
+OsDataExecutionPreventionDrivers                        : True
+OsDataExecutionPreventionSupportPolicy                  : OptIn
+OsDebug                                                 : False
+OsDistributed                                           : False
+OsEncryptionLevel                                       : 256
+OsForegroundApplicationBoost                            : Maximum
+OsTotalVisibleMemorySize                                : 8085560
+OsFreePhysicalMemory                                    : 635212
+OsTotalVirtualMemorySize                                : 30105656
+OsFreeVirtualMemory                                     : 10553784
+OsInUseVirtualMemory                                    : 19551872
+OsTotalSwapSpaceSize                                    :
+OsSizeStoredInPagingFiles                               : 22020096
+OsFreeSpaceInPagingFiles                                : 19343840
+OsPagingFiles                                           : {C:\pagefile.sys}
+OsHardwareAbstractionLayer                              : 10.0.26100.1
+OsInstallDate                                           : 14/09/2025 9:33:33 pm
+OsManufacturer                                          : Microsoft Corporation
+OsMaxNumberOfProcesses                                  : 4294967295
+OsMaxProcessMemorySize                                  : 137438953344
+OsMuiLanguages                                          : {en-US}
+OsNumberOfLicensedUsers                                 :
+OsNumberOfProcesses                                     : 357
+OsNumberOfUsers                                         : 3
+OsOrganization                                          :
+OsArchitecture                                          : 64-bit
+OsLanguage                                              : en-US
+OsProductSuites                                         : {TerminalServicesSingleSession, HomeEdition}
+OsOtherTypeDescription                                  :
+OsPAEEnabled                                            :
+OsPortableOperatingSystem                               : False
+OsPrimary                                               : True
+OsProductType                                           : WorkStation
+OsRegisteredUser                                        : meejhay
+OsSerialNumber                                          : 00356-24734-60025-AAOEM
+OsServicePackMajorVersion                               : 0
+OsServicePackMinorVersion                               : 0
+OsStatus                                                : OK
+OsSuites                                                : {TerminalServices, TerminalServicesSingleSession, HomeEdition}
+OsServerLevel                                           :
+KeyboardLayout                                          : en-US
+TimeZone                                                : (UTC+08:00) Kuala Lumpur, Singapore
+LogonServer                                             : \\LEIGH
+PowerPlatformRole                                       : Mobile
+HyperVisorPresent                                       : True
+HyperVRequirementDataExecutionPreventionAvailable       :
+HyperVRequirementSecondLevelAddressTranslation          :
+HyperVRequirementVirtualizationFirmwareEnabled          :
+HyperVRequirementVMMonitorModeExtensions                :
+DeviceGuardSmartStatus                                  : Off
+DeviceGuardRequiredSecurityProperties                   : {0}
+DeviceGuardAvailableSecurityProperties                  : {BaseVirtualizationSupport, SecureBoot, DMAProtection, 5...}
+DeviceGuardSecurityServicesConfigured                   : {HypervisorEnforcedCodeIntegrity}
+DeviceGuardSecurityServicesRunning                      : {HypervisorEnforcedCodeIntegrity}
+DeviceGuardCodeIntegrityPolicyEnforcementStatus         : EnforcementMode
+DeviceGuardUserModeCodeIntegrityPolicyEnforcementStatus : Off
+
+
+
+PS C:\WINDOWS\System32> Get-Process
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+     90       8     1504       1708              4584   0 AAADSvc
+   1051      54    95832       8592      28.48  24784   5 ACCStd
+    129       9     3380       1476              4592   0 ACCSvc
+    161      10     2008       1956       0.08  10320   5 ACCUserPS
+    261      15     7288       5964             18828   0 AcerCCAgent
+    283      15     7112       4384              4648   0 AcerDIAgent
+    249      15    20424       7504              4676   0 AcerEZService
+   2433       9     1544       2088              4700   0 AcerGAICameraService
+    361      18     8544       3880       0.28  15728   5 AcerGAICameraW
+    376      18     5752       4564              4660   0 AcerPixyService
+    478      23    12304       5384              4684   0 AcerQAAgent
+    306      58    32292       4312              7052   0 AcerService
+    250      15    18788       2816              4704   0 AcerServiceWrapper
+    226      14     3696       2568             28804   5 AcerSysHardwareService
+    349      20     7272       2264              9704   0 AcerSysMonitorService
+    121       7     1272       1768              4760   0 AcerSystemCentralService
+    154       9     1468       1444             11068   0 ADESv2BW
+   1153      17     1728       1908              4632   0 ADESv2Svc
+   1255      94   119704      35420      27.00  16272   5 Adobe Desktop Service
+    245      23     6996       4540       2.33  28988   5 AdobeIPCBroker
+    420      20    46352        468       0.36  14840   5 AdobeNotificationClient
+    374      17     4848       2420              4740   0 AdobeUpdateService
+    222      13     3844       6036              9112   0 AggregatorHost
+    314      18    21472       5888       0.20  27788   5 ai
+    676      38    43044       3324       4.34   4728   0 AnyDesk
+    430      27    43576       6604      13.20  11692   5 AnyDesk
+    358      19    12300      16292       0.59  10180   5 AppActions
+    170      10     2072      10276       0.03  31104   5 AppVShNotify
+    355      24     6948       5328       1.66  16228   5 AQAUserPS
+    134       9     1608       1988              4600   0 ARTAimmxService
+    486      22    33640      15588     106.48  19208   0 audiodg
+    433      20    28496      32092       1.66  16320   5 backgroundTaskHost
+    208      10     2820       3548       0.14  25240   5 backgroundTaskHost
+    326      20    31844       6092              6132   0 CamUsage
+     48       5      612        636       0.02   1348   5 CCLibrary
+     48       5      592        620       0.02  26032   5 CCXProcess
+    361      30    80236      20988       4.91   6668   5 Code
+    172      22   199064       7780       9.19   8200   5 Code
+    308      25    57156      15360       3.06   9208   5 Code
+    346      35    90784      12364       2.16   9560   5 Code
+    169      19    25956       8020       0.64  15260   5 Code
+    398      59   142532      15400       3.22  17172   5 Code
+    519      44   265204     126924      53.64  18744   5 Code
+    335      31   125952       8220      83.78  19204   5 Code
+    770     135   467920      27668      39.20  20396   5 Code
+    241      11     9816       2740       0.08  26320   5 Code
+    415      31   202388       3180       2.70  27156   5 Code
+    923      28   154468       8880       8.33  27964   5 Code
+   1190      62   121740      29784      27.61  28464   5 Code
+    350      19    14736      16692      10.63  28720   5 Code
+    178      12     7400       2008       0.45  22204   5 CodeSetup-stable-a5b500951314efd502d07465bd138dfbd714a960
+    343      25    25520       5332      51.34  18700   5 CodeSetup-stable-a5b500951314efd502d07465bd138dfbd714a960.tmp
+    332      18    18652      16812       2.09  22856   5 codex
+    142      11     1704       2052              7664   0 conhost
+    141      10     1620       2384              7952   0 conhost
+    138      10     1608       2476              7996   0 conhost
+     98       8     2356       1752       0.08  12268   5 conhost
+    152      10     1536      10080       0.02  16044   5 conhost
+     98       8     1304       1420       0.02  20432   5 conhost
+     98       8     1184       1344       0.03  22912   5 conhost
+    121      11     1604       9188       0.05  26692   5 conhost
+    843      38    28220      19548       6.52  29116   5 CoreSync
+    113       8     1512       1776       0.03   5288   5 crashpad_handler
+     84       8     1368       1420              7516   0 crashpad_handler
+    145      11     2080       2520       0.05  24852   5 crashpad_handler
+   1064      51   210752      37616     273.83   5124   5 Creative Cloud
+    538      29    12312      13564       1.56  25308   5 Creative Cloud Helper
+    767      32   153608      11180       5.06  16752   5 Creative Cloud UI Helper
+    259      20     9256       5604       0.13  17396   5 Creative Cloud UI Helper
+    896      39   423120      16328      97.66  26744   5 Creative Cloud UI Helper
+    333      22    17880       8688       2.61  28764   5 Creative Cloud UI Helper
+    505      26    48844       5756       1.06  13728   5 CrossDeviceResume
+    742      75    21336      11196       6.63  25412   5 CrossDeviceService
+   1024      37     2856       3788              1072   0 csrss
+   1076      38     3304       4748             11616   5 csrss
+    562      20     6532      15988       4.77   3112   5 ctfmon
+    336      15     3376       3228              8816   0 dasHost
+    339      20    10036      29576       0.42   9752   5 DataExchangeHost
+    180      10     2120       3852       0.20  10620   5 dllhost
+    132       9     1476       3456       0.02  17908   5 dllhost
+   2063      50   182896      81484             26556   5 dwm
+   4750     131   287920     139944      69.66  15520   5 explorer
+    547      28    15152      26924       0.50  24932   5 FileCoAuth
+     43       8     1952       1464              1488   0 fontdrvhost
+     43       9     3884       3612             28308   5 fontdrvhost
+    849      49   117748      27376              4848   0 GooglePlayGamesServices
+    321      17     5328       1024       0.73   9024   5 HostAppServiceUpdater
+      0       0       60          8                 0   0 Idle
+    403      36    40600       4356              4872   0 IntelAudioService
+    135       8     1448       1336              2340   0 IntelCpHDCPSvc
+    115       9     1676       2272       3.53   9616   5 ipf_helper
+    138       9     2108       1504              4984   0 ipf_uf
+    139      13     2716       1340              4940   0 ipfsvc
+    145      10     1436       1624              5036   0 jhi_service
+    133       9     1560        764       0.27  17376   5 JSRtMon2
+    753      32    55536        688       1.39  25860   5 LockApp
+     64       6     1272       1248              1324   0 LsaIso
+   2194      30    14428      17664              1332   0 lsass
+      0       0     5768      88644              3656   0 Memory Compression
+    211      15     2980       3064             24232   0 MicrosoftEdgeUpdate
+    316      19    31636       6032             23548   0 MicUsage
+    543      18    12564       8108              5048   0 MpDefenderCoreService
+    342      21    14656       4536       1.98   2664   5 msedgewebview2
+    785      27   102392       5504       1.64   4076   5 msedgewebview2
+    189      12     2992       2580       0.23   6436   5 msedgewebview2
+    241      16     9584       5292       0.88  10340   5 msedgewebview2
+    176      12    11168       1992       0.39  11456   5 msedgewebview2
+    455      66   380588      50920      53.03  13112   5 msedgewebview2
+    599      32   102684      10284       2.30  13328   5 msedgewebview2
+   1281      52    45140      14016       6.38  14380   5 msedgewebview2
+    451      33    91636     100072       8.70  14612   5 msedgewebview2
+   1383      55    71004      40396      41.42  17356   5 msedgewebview2
+   1277      55    46736      47672       7.20  17920   5 msedgewebview2
+    394      28    15660      25228       1.69  20192   5 msedgewebview2
+    184      11     2956       2436       0.09  21340   5 msedgewebview2
+    390      28    15840      16220       5.63  23764   5 msedgewebview2
+    181      12     2924       2140       0.16  25376   5 msedgewebview2
+    762      26   158204      66860       4.06  25980   5 msedgewebview2
+    184      12    10368       6240       0.64  27188   5 msedgewebview2
+    182      12     9980       8688       0.34  28696   5 msedgewebview2
+    431      31   130236       3232       6.73  29444   5 msedgewebview2
+   1163     291   420452     197928              5524   0 MsMpEng
+   1365      55    93732      14824       7.69  10108   5 ms-teams
+   1151      58    60948      21744      10.50  27044   5 ms-teams
+    217      12     5220       6108              6432   0 NisSrv
+    860     146    94480      27448       6.44  15140   5 node
+    714      40   108316      39524      11.67  17332   5 node
+    830      30    34488      13344             15252   0 OfficeClickToRun
+    481      31    38156       7176              4960   0 OneApp.IGCC.WinService
+    905      45    30612      16668       6.41  18472   5 OneDrive
+    630      32    45452       5872       2.56  30880   5 OneDrive.Sync.Service
+    323      15     3788      20344       0.61   6764   5 OpenConsole
+    151      11     2324       3548       0.06  28480   5 OpenConsole
+    287      24    44016      10848       1.50    424   5 opera
+   2678     112   310116     151684     180.44   3800   5 opera
+    322      24    48784      27216       1.06   4552   5 opera
+    286      23    31684      29124       0.92   4888   5 opera
+    283      30    68244      24104      24.91   6324   5 opera
+    312      26    41248      10136       2.41   7120   5 opera
+    553      29    67436       7412       0.42   8060   5 opera
+    280      23    31744       6328       0.50   8236   5 opera
+    306      32   161648      28176       5.97   8860   5 opera
+    352      36   205588      96792      57.59   9972   5 opera
+    280      29    89924       4936       8.36  10224   5 opera
+    303      25    48904      38592       2.72  11572   5 opera
+    243      24    23144      47556       0.19  13448   5 opera
+    407      44   289320      95252      71.73  14864   5 opera
+    265      17    13288       5756       0.41  17424   5 opera
+    614      56    34092      41308      32.50  18856   5 opera
+    300      25    45944       9444       2.72  19904   5 opera
+    518      54   307072      78552      46.17  21180   5 opera
+    277      23    40908      10064       1.31  21252   5 opera
+    442      31   110424      32728      28.33  23188   5 opera
+   2372      76   496824     205816     264.89  23564   5 opera
+    317      25    47012       8452       4.20  23604   5 opera
+    342      31    79564      11856       6.59  24532   5 opera
+    277      24    49308       6132       1.83  24708   5 opera
+    338      25    44040       6696       2.88  25188   5 opera
+    220      17    11748       9396       0.50  25416   5 opera
+    301      26    41656      19984       2.08  25560   5 opera
+    399      61   343516     249716     286.78  27556   5 opera
+    445      42   455848     424996     185.05  28012   5 opera
+    361      31   117220      27276       8.70  28040   5 opera
+    289      25    42392      12132       0.92  29200   5 opera
+    339      30    86284      69296       3.42  30620   5 opera
+    361      12     2628       3272       0.19  15016   5 opera_crashreporter
+    120       9     1460       1620              5184   0 pg_ctl
+    112       9     1464       1536              5220   0 pg_ctl
+    470      11     3104       2004              6108   0 postgres
+    472      12     3596       2296              6700   0 postgres
+    470      11     3100       2408              7368   0 postgres
+    367      11     3560       3220              7656   0 postgres
+    367      11     3592       2440              7692   0 postgres
+    472      11     3124       2140              7708   0 postgres
+    468      11     2728       2164              7756   0 postgres
+    363      11     2664       1828              7796   0 postgres
+    472      12     3576       3340              7816   0 postgres
+    469      11     3060       2096              7840   0 postgres
+    364      11     3032       2052              7864   0 postgres
+    476      11     3080       2056              7884   0 postgres
+    519      14     3152       3404              7940   0 postgres
+    469      11     3084       2368              7968   0 postgres
+    410      14     3396       3964              7972   0 postgres
+    365      11     3036       2060              8024   0 postgres
+    367      11     3236       2136              8180   0 postgres
+    894      46    68416      92832       3.05  18148   5 powershell
+    658      41    67480       4136       6.72  20372   5 powershell
+    526      49  1486500      20084      20.30  19496   5 quick-look
+    139      10     1692       1580       0.06   9044   5 quick-look-daemon
+    270     129    45820       8240      55.20  12748   5 RAKK ILIS Mechanical Keyboard
+      0      29    17100      34112               232   0 Registry
+    176      12     2420       1624              5316   0 RstMwService
+    540      16     8608       3360              5324   0 RtkAudUService64
+    452      16     4368       6148       0.86  16544   5 RtkAudUService64
+    433      15     6516       3692             22672   5 RtkAudUService64
+    168       9     2232       2360       0.11   4504   5 RuntimeBroker
+    147       9     1960       1796       0.03  13716   5 RuntimeBroker
+    173      10     2368       2220       0.13  16504   5 RuntimeBroker
+    277      13     3080       3300       0.36  19012   5 RuntimeBroker
+    298      13     3360       2920       0.73  21924   5 RuntimeBroker
+    560      24     9068       9956       1.56  26308   5 RuntimeBroker
+    257      14     3392       3248       0.30  28136   5 RuntimeBroker
+   1037      39    19736      53544       8.95  29092   5 RuntimeBroker
+    353      16     4736      13932       1.84  30916   5 RuntimeBroker
+   1305      60    92780      92056      12.58  21012   5 SearchHost
+   1121      25    25804      26312              9952   0 SearchIndexer
+      0       0      172      41332               188   0 Secure System
+    595      23     9100      10132              6408   0 SecurityHealthService
+    178      11     1992       3784       0.03  15812   5 SecurityHealthSystray
+    867      54    34180      16824              5024   0 servicehost
+    940      13     6924       7396              1300   0 services
+    722      32    55536        976       1.05  13800   5 ShellExperienceHost
+   1071      44    90780      23684       1.27  18084   5 ShellHost
+    459      22    47192      16368       0.14  19924   5 ShellHost
+    847      25     8652      18328      17.42   2852   5 sihost
+    186      11     2940      13148       0.13  25424   5 smartscreen
+     58       4     1156        156               796   0 smss
+    491      25     6772      11524              4432   0 spoolsv
+    250      16    19776       7952       0.52   8012   5 Spotify
+    613      34    25632      24424      18.61  14172   5 Spotify
+    305      18    18240       9144      10.06  16076   5 Spotify
+    425      40   307652     257748     296.75  16464   5 Spotify
+   2206      90   183028      67348      47.03  22620   5 Spotify
+    240      16    78832       5728       1.88  23460   5 Spotify
+    144       9     2368       2324       0.08  28364   5 Spotify
+   1091      37   285660     117464     203.03  29084   5 Spotify
+    682      28    12720      12804       1.36  18808   5 SpotifyLauncher
+    551      33    43460      20152             20768   0 sqlceip
+    755      60   429076      52576              8508   0 sqlservr
+    158      11     2184       1620              5388   0 sqlwriter
+   1275      59   126168      98636      14.78  21528   5 StartMenuExperienceHost
+    352      25    15948       1940       1.81  25748   5 StorPSCTL
+    206      11     2088       1876              1432   0 svchost
+   1532      31    16232      25020              1460   0 svchost
+    381      18     4092       6312              1476   0 svchost
+   1788      23    13572      17432              1644   0 svchost
+    413      15     3532       5196              1692   0 svchost
+    106      11     1384       1620              1856   0 svchost
+    176      45    11300       3300              1904   0 svchost
+    278      41     2544       2996              1928   0 svchost
+    320      37     3880       7452              1944   0 svchost
+    346      32     4056       7764              1960   0 svchost
+    183     149     2628       1728              2044   0 svchost
+    260      14     3388       4116              2064   0 svchost
+    409      18     7148       7792              2072   0 svchost
+    208      11     2572       6804              2080   0 svchost
+    341      10     2476       3700              2092   0 svchost
+    190       8     1800       2724              2104   0 svchost
+    191      11     2480       4888              2124   0 svchost
+    243      12     2932       4760              2164   0 svchost
+    337      13     3016       2292              2372   0 svchost
+    318      13     3420      10036              2380   0 svchost
+    123       9     1612       1468              2472   0 svchost
+   1263      22     7340      10492              2488   0 svchost
+    207      11     2156       5108              2604   0 svchost
+    236      12     2508       2604              2900   0 svchost
+    479      15     3152       4796              2924   0 svchost
+    249      12     2748       3932              2996   0 svchost
+    167      10     1884       2672              3052   0 svchost
+    127       8     1664       1484              3244   0 svchost
+    306      13     3968       3020              3252   0 svchost
+    405      13    51660      36300              3372   0 svchost
+    514      16    18648      10300              3516   0 svchost
+    332       8     1512       1852              3544   0 svchost
+    261      15     3760       5680              3552   0 svchost
+    185      10     2164       4892              3560   0 svchost
+    235      16     2540       2068              3708   0 svchost
+    216      13     2768       4136              3744   0 svchost
+    327      11     2884       2284              3752   0 svchost
+    541      17     4740       9984              3840   0 svchost
+    208      10     2016       2064              3872   0 svchost
+    415      13    14148       3688              3904   0 svchost
+    134       9     1552       1476              4116   0 svchost
+    513      35    16592       9136              4172   0 svchost
+    578      28     7424      10780              4232   0 svchost
+    162      11     1888       4576              4256   0 svchost
+    363      16     3964       4316              4260   0 svchost
+    139       9     1532       1716              4288   0 svchost
+    522      30     6284       8972              4360   0 svchost
+    194      10     2664       5404       0.25   4372   5 svchost
+    186      12     2204       3240              4556   0 svchost
+    819      32    35988      25416              4800   0 svchost
+    416      20    24652      14608              4828   0 svchost
+    394      22     3248       2928              4952   0 svchost
+    206      12     2496       1896              5428   0 svchost
+    132       8     1468       1496              5468   0 svchost
+    802      20    13676      18236              5508   0 svchost
+    448      22     5272       7492              5540   0 svchost
+    162       9     3612      12432              5680   0 svchost
+    436      25     3936       3464              6296   0 svchost
+    218      13     2684       4960              7424   0 svchost
+    255      14     3104       2452              8164   0 svchost
+    552      20     7944      15916              8480   0 svchost
+    135       9     1888       1832              8692   0 svchost
+    271      13     7564       8312              9676   0 svchost
+    139       9     2280       1980              9712   0 svchost
+    513      20    11212      12836              9764   0 svchost
+    233      12     2968       3488              9992   0 svchost
+    476      21     6340      15900             10360   0 svchost
+    339      16     7160      18260             10452   0 svchost
+    283      14     3052       8304             10552   0 svchost
+    492      19     9320      15620       8.31  11160   5 svchost
+    436      25     5988      11864             11188   0 svchost
+    112       8     1400       1324             12064   0 svchost
+    492      22     8356      16316       1.78  12196   5 svchost
+   1697      42   137596      14220             12796   0 svchost
+    466      19    14224      16704       9.00  13220   5 svchost
+    376      18     5376      23588       1.11  14504   5 svchost
+    653      25    18684      23336             14736   0 svchost
+    222      11     2376       5516             14804   0 svchost
+    324      22     4828      11768       0.89  14824   5 svchost
+    235      16     2300       2948             16020   0 svchost
+    181       9     2024       2864             17208   0 svchost
+   1907      26    19120      20832             17868   0 svchost
+    455      19     5580      11664             18124   0 svchost
+   1194      88    37548      19652             18944   0 svchost
+    211      12     3044       5784             20820   0 svchost
+    347      15     3952       8824             20864   0 svchost
+    212      13     2056       2192             21044   0 svchost
+    377      25    43676      25028             21096   0 svchost
+    220      14     3456       5476             21184   0 svchost
+    157      42     1896       1784             21752   0 svchost
+    131       8     1552       1468             24136   0 svchost
+    612      35    12232       8644             24344   0 svchost
+    146       9     2124       1696       0.14  26664   5 svchost
+    119       8     1364       1376             28332   0 svchost
+    247      12     3104       8248       0.92  28468   5 svchost
+    152      10     2200       1956       0.14  29320   5 svchost
+    123       9     1924       9112             29660   0 svchost
+   6967       0       52       3412                 4   0 System
+    268      15     5936       5040       0.89   2696   5 taskhostw
+    300      32     7704      10348       1.39  19824   5 taskhostw
+   1436      84   127268      32300       7.06  26104   5 TextInputHost
+    222      14     4672      18440             11812   0 TiWorker
+    145       9     1976      10140              9680   0 TrustedInstaller
+    607      33    34300      10284              8500   0 UBTService
+    524      33    10896      11600       4.48  25104   5 uihost
+    140      10     1884       3220             16048   0 unsecapp
+    154      12     2036      11940       0.03  30956   5 UserOOBEBroker
+    174      10     1820       2284       1.33  12428   5 vgtray
+    982      40    13860      18160       5.84   9408   5 Widgets
+    351      19     5464      13676       2.91  27296   5 WidgetService
+    662      32    92512     147968       2.41  16152   5 WindowsTerminal
+    176      12     1856       4276              1156   0 wininit
+    294    1293     2704       2116             29020   5 winlogon
+   1662      58   229328     123316      22.58  23616   5 WINWORD
+    120       8     1380       1488              9168   0 wlanext
+    182      14     2608       3416             17084   0 WmiApSrv
+    718      24    20768      25324              7104   0 WmiPrvSE
+    598      31    29692       8892             12124   0 WmiPrvSE
+    184      13     6288      16192             16300   0 WmiPrvSE
+    269      14     2888       2324              5516   0 WMIRegistrationService
+    388      23     8304       4724       0.44  18928   5 WSHelper
+    452      20     6200       3376              5572   0 wslservice
+     87       7     1040       2180              5008   0 WsNativePushService
+    255      14     3512      15540       0.31  11212   5 WsToastNotification
+    339      18     8412       2648              1592   0 WUDFHost
+    469      27     8360       3732              3024   0 WUDFHost
+
+
+PS C:\WINDOWS\System32> Get-Volume
+
+DriveLetter FriendlyName FileSystemType DriveType HealthStatus OperationalStatus SizeRemaining      Size
+----------- ------------ -------------- --------- ------------ ----------------- -------------      ----
+            Recovery     NTFS           Fixed     Healthy      OK                     171.8 MB   1024 MB
+C           Acer         NTFS           Fixed     Healthy      OK                     88.71 GB 475.67 GB
