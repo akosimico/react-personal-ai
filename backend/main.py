@@ -1,29 +1,47 @@
+import logging
 import os
 import re
 import shutil
-from typing import List, Optional
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from pathlib import Path
+from typing import Generator, List, Optional, Tuple
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from dotenv import load_dotenv
+from pypdf import PdfReader
 
 load_dotenv()
 
-app = FastAPI(title="Personal RAG Engine API")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+DOCS_FOLDER = Path(os.getenv("DOCS_FOLDER", "docs"))
+DEMO_MODE = os.getenv("DEMO_MODE", "false").lower() == "true"
+
+DEMO_BRIEF_FILENAME = "demo-project-brief.md"
+DEMO_CONTENT_PREVIEW_CHARS = 2500
+SUMMARY_KEYWORDS = ("summar", "takeaway", "key")
+MILESTONE_KEYWORDS = ("deadline", "date", "milestone")
+
+DOCS_FOLDER.mkdir(parents=True, exist_ok=True)
+
+app = FastAPI(
+    title="Personal RAG Engine API",
+    description="Document management and retrieval-augmented chat API.",
+    version="1.0.0",
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url],
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-DOCS_FOLDER = "docs"
-os.makedirs(DOCS_FOLDER, exist_ok=True)
 
 
 class ChatMessage(BaseModel):
@@ -36,8 +54,38 @@ class ChatRequest(BaseModel):
     chat_history: List[ChatMessage] = []
 
 
-def extract_file_mentions(text: str, filenames: List[str]) -> tuple[str, List[str]]:
-    """Extract @filename or @"file name.pdf" mentions from the prompt."""
+class DocumentInfo(BaseModel):
+    name: str
+    size_kb: float
+    extension: str
+
+
+class UploadResult(BaseModel):
+    name: str
+    status: str
+    error: Optional[str] = None
+
+
+class UploadResponse(BaseModel):
+    uploaded: List[UploadResult]
+
+
+class DeleteResponse(BaseModel):
+    status: str
+    message: str
+
+
+def extract_file_mentions(text: str, filenames: List[str]) -> Tuple[str, List[str]]:
+    """
+    Extract @filename or @"file name.pdf" mentions from a prompt.
+
+    Args:
+        text: The raw user prompt, potentially containing @mentions.
+        filenames: Known filenames in the knowledge base to match against.
+
+    Returns:
+        A tuple of (cleaned question with mentions removed, matched filenames).
+    """
     mentioned_files = []
     question = text
 
@@ -52,106 +100,163 @@ def extract_file_mentions(text: str, filenames: List[str]) -> tuple[str, List[st
     return question.strip(), mentioned_files
 
 
-# 1. Get all indexed documents
-@app.get("/api/documents")
-def get_documents():
-    if not os.path.exists(DOCS_FOLDER):
+def list_knowledge_base_files() -> List[str]:
+    """Return the names of all files currently stored in the docs folder."""
+    if not DOCS_FOLDER.exists():
         return []
-
-    files = []
-    for name in sorted(os.listdir(DOCS_FOLDER)):
-        if name.startswith("."):
-            continue
-        path = os.path.join(DOCS_FOLDER, name)
-        if os.path.isfile(path):
-            files.append(
-                {
-                    "name": name,
-                    "size_kb": round(os.path.getsize(path) / 1024, 1),
-                    "extension": name.split(".")[-1].upper() if "." in name else "FILE",
-                }
-            )
-    return files
+    return [
+        entry.name
+        for entry in sorted(DOCS_FOLDER.iterdir())
+        if entry.is_file() and not entry.name.startswith(".")
+    ]
 
 
-# 2. Upload and index new documents
-@app.post("/api/documents/upload")
-async def upload_documents(files: List[UploadFile] = File(...)):
-    from ingest import add_document
+def _load_demo_brief() -> str:
+    """Load the preloaded demo project brief, if available."""
+    demo_path = DOCS_FOLDER / DEMO_BRIEF_FILENAME
 
-    results = []
+    if not demo_path.is_file():
+        logger.warning("Demo brief not found at %s", demo_path)
+        return ""
 
-    for file in files:
-        safe_name = os.path.basename(file.filename)
-        dest = os.path.join(DOCS_FOLDER, safe_name)
-
-        # Handle filename collisions
-        if os.path.exists(dest):
-            base, ext = os.path.splitext(safe_name)
-            i = 1
-            while os.path.exists(dest):
-                dest = os.path.join(DOCS_FOLDER, f"{base} ({i}){ext}")
-                i += 1
-
-        try:
-            with open(dest, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
-
-            # Ingest into vector store
-            add_document(dest)
-            results.append({"name": os.path.basename(dest), "status": "success"})
-        except Exception as e:
-            if os.path.isfile(dest):
-                os.remove(dest)
-            results.append({"name": safe_name, "status": "error", "error": str(e)})
-
-    return {"uploaded": results}
-
-
-# 3. Delete a document
-@app.delete("/api/documents/{filename}")
-def remove_document(filename: str):
-    from ingest import delete_document
-
-    path = os.path.join(DOCS_FOLDER, filename)
     try:
-        # Delete from vector store
-        delete_document(filename)
+        return demo_path.read_text(encoding="utf-8")
+    except OSError:
+        logger.exception("Failed to read demo brief at %s", demo_path)
+        return ""
 
-        # Delete physical file
-        if os.path.isfile(path):
-            os.remove(path)
-        return {"status": "success", "message": f"Deleted {filename}"}
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to delete {filename}: {str(e)}"
+
+def demo_response(message: str):
+    message_lower = message.lower()
+
+    pdf_path = DOCS_FOLDER / "About me.pdf"
+    md_path = DOCS_FOLDER / "demo-project-brief.md"
+
+    reader = PdfReader(str(pdf_path))
+    about_text = "\n".join(page.extract_text() or "" for page in reader.pages)
+
+    project_text = md_path.read_text(encoding="utf-8")
+
+    if any(
+        word in message_lower
+        for word in ["about me", "author", "mico", "bio", "background"]
+    ):
+        yield "Author profile:\n\n" + about_text[:4000]
+    elif any(
+        word in message_lower for word in ["project", "demo", "milestone", "feature"]
+    ):
+        yield "Project brief:\n\n" + project_text[:4000]
+    else:
+        yield (
+            "Author profile:\n\n"
+            + about_text[:2000]
+            + "\n\nProject brief:\n\n"
+            + project_text[:2000]
         )
 
 
-# 4. Stream RAG Chat Response
+def _require_live_mode() -> None:
+    """Raise an HTTPException if the API is running in demo mode."""
+    if DEMO_MODE:
+        raise HTTPException(
+            status_code=403,
+            detail="This action is disabled in demo mode. Use the preloaded sample document.",
+        )
+
+
+@app.get("/api/documents", response_model=List[DocumentInfo])
+def get_documents() -> List[DocumentInfo]:
+    """List all documents currently indexed in the knowledge base."""
+    documents = []
+    for name in list_knowledge_base_files():
+        path = DOCS_FOLDER / name
+        documents.append(
+            DocumentInfo(
+                name=name,
+                size_kb=round(path.stat().st_size / 1024, 1),
+                extension=name.rsplit(".", 1)[-1].upper() if "." in name else "FILE",
+            )
+        )
+    return documents
+
+
+@app.post("/api/documents/upload", response_model=UploadResponse)
+async def upload_documents(files: List[UploadFile] = File(...)) -> UploadResponse:
+    """Upload one or more documents and add them to the vector index."""
+    _require_live_mode()
+
+    from ingest import add_document
+
+    results: List[UploadResult] = []
+
+    for file in files:
+        safe_name = os.path.basename(file.filename)
+        dest = DOCS_FOLDER / safe_name
+
+        # Handle filename collisions by appending a numeric suffix.
+        if dest.exists():
+            stem, suffix = dest.stem, dest.suffix
+            counter = 1
+            while dest.exists():
+                dest = DOCS_FOLDER / f"{stem} ({counter}){suffix}"
+                counter += 1
+
+        try:
+            with dest.open("wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
+
+            add_document(str(dest))
+            results.append(UploadResult(name=dest.name, status="success"))
+        except Exception as exc:
+            logger.exception("Failed to upload/index file %s", safe_name)
+            if dest.is_file():
+                dest.unlink()
+            results.append(UploadResult(name=safe_name, status="error", error=str(exc)))
+
+    return UploadResponse(uploaded=results)
+
+
+@app.delete("/api/documents/{filename}", response_model=DeleteResponse)
+def remove_document(filename: str) -> DeleteResponse:
+    """Delete a document from disk and remove it from the vector index."""
+    _require_live_mode()
+
+    from ingest import delete_document
+
+    path = DOCS_FOLDER / filename
+    try:
+        delete_document(filename)
+        if path.is_file():
+            path.unlink()
+        return DeleteResponse(status="success", message=f"Deleted {filename}")
+    except Exception as exc:
+        logger.exception("Failed to delete file %s", filename)
+        raise HTTPException(
+            status_code=500, detail=f"Failed to delete {filename}: {exc}"
+        ) from exc
+
+
 @app.post("/api/chat")
-async def chat_stream(request: ChatRequest):
+async def chat_stream(request: ChatRequest) -> StreamingResponse:
+    """Stream a chat response, grounded in the knowledge base, for a user message."""
+    if DEMO_MODE:
+        return StreamingResponse(
+            demo_response(request.message), media_type="text/plain"
+        )
+
     from rag_chain import get_rag_chain
 
-    knowledge_base_files = [
-        name
-        for name in os.listdir(DOCS_FOLDER)
-        if not name.startswith(".") and os.path.isfile(os.path.join(DOCS_FOLDER, name))
-    ]
-
+    knowledge_base_files = list_knowledge_base_files()
     clean_question, mentioned_files = extract_file_mentions(
         request.message, knowledge_base_files
     )
 
-    # Initialize LangChain RAG chain with optional document filter
     rag_chain = get_rag_chain(source_names=mentioned_files or None)
-
-    # Format history for LangChain
     formatted_history = [
-        {"role": m.role, "content": m.content} for m in request.chat_history
+        {"role": msg.role, "content": msg.content} for msg in request.chat_history
     ]
 
-    def stream_generator():
+    def stream_generator() -> Generator[str, None, None]:
         try:
             for chunk in rag_chain.stream(
                 {
@@ -159,11 +264,10 @@ async def chat_stream(request: ChatRequest):
                     "chat_history": formatted_history,
                 }
             ):
-                # Extract text if chunk is an AIMessageChunk or string
-                text = chunk.content if hasattr(chunk, "content") else str(chunk)
-                yield text
-        except Exception as e:
-            yield f"\n[Error generating response: {str(e)}]"
+                yield chunk.content if hasattr(chunk, "content") else str(chunk)
+        except Exception as exc:
+            logger.exception("Error while streaming RAG response")
+            yield f"\n[Error generating response: {exc}]"
 
     return StreamingResponse(stream_generator(), media_type="text/plain")
 

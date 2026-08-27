@@ -25,6 +25,8 @@ import {
   CheckCircle2,
   AlertCircle,
   AlertTriangle,
+  Menu,
+  PanelLeftClose,
 } from "lucide-react";
 import {
   fetchDocuments,
@@ -39,6 +41,7 @@ const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || "Personal AI Workspace";
 const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0";
 const APP_AUTHOR = process.env.NEXT_PUBLIC_APP_AUTHOR || "Mico Barnedo";
 const APP_YEAR = process.env.NEXT_PUBLIC_APP_YEAR || "2026";
+const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 const TECH_STACK = ["Python", "FastAPI", "Next.js", "LangChain", "ChromaDB", "Tailwind CSS"];
 
@@ -57,7 +60,10 @@ export default function PersonalRAG() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState<string[]>([]);
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
-  
+
+  // Sidebar (collapsible on mobile, always visible on desktop)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   // Modals & Popovers
   const [showAbout, setShowAbout] = useState(false);
   const [docToDelete, setDocToDelete] = useState<string | null>(null);
@@ -90,26 +96,26 @@ export default function PersonalRAG() {
     }
   };
   const getBadgeColor = (ext: string) => {
-  switch (ext.toUpperCase()) {
-    case "PDF":
-      return "bg-red-950/80 text-red-400 border-red-800/60";
-    case "DOCX":
-    case "DOC":
-      return "bg-blue-950/80 text-blue-400 border-blue-800/60";
-    case "TXT":
-      return "bg-emerald-950/80 text-emerald-400 border-emerald-800/60";
-    case "MD":
-      return "bg-purple-950/80 text-purple-400 border-purple-800/60";
-    case "CSV":
-    case "XLS":
-    case "XLSX":
-      return "bg-amber-950/80 text-amber-400 border-amber-800/60";
-    case "JSON":
-      return "bg-cyan-950/80 text-cyan-400 border-cyan-800/60";
-    default:
-      return "bg-indigo-950/80 text-indigo-300 border-indigo-700/50";
-  }
-};
+    switch (ext.toUpperCase()) {
+      case "PDF":
+        return "bg-red-950/80 text-red-400 border-red-800/60";
+      case "DOCX":
+      case "DOC":
+        return "bg-blue-950/80 text-blue-400 border-blue-800/60";
+      case "TXT":
+        return "bg-emerald-950/80 text-emerald-400 border-emerald-800/60";
+      case "MD":
+        return "bg-purple-950/80 text-purple-400 border-purple-800/60";
+      case "CSV":
+      case "XLS":
+      case "XLSX":
+        return "bg-amber-950/80 text-amber-400 border-amber-800/60";
+      case "JSON":
+        return "bg-cyan-950/80 text-cyan-400 border-cyan-800/60";
+      default:
+        return "bg-indigo-950/80 text-indigo-300 border-indigo-700/50";
+    }
+  };
 
   useEffect(() => {
     loadDocs();
@@ -341,10 +347,10 @@ export default function PersonalRAG() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#0A0D14] text-slate-100 font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
-      
+    <div className="flex h-screen bg-[#0A0D14] text-slate-100 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 overflow-hidden">
+
       {/* 🔔 File Status Toasts */}
-      <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
+      <div className="fixed top-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none">
         {toasts.map((t) => (
           <div
             key={t.id}
@@ -366,23 +372,45 @@ export default function PersonalRAG() {
         ))}
       </div>
 
-      {/* 📁 SIDEBAR */}
-      <aside className="w-80 bg-[#0F1420] border-r border-[#1F2C42] flex flex-col justify-between">
-        
+      {/* 🌑 Mobile overlay backdrop (click to close sidebar) */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-[1px] md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* 📁 SIDEBAR — fixed overlay on mobile, static column on desktop */}
+      <aside
+        className={`fixed md:static inset-y-0 left-0 z-40 w-72 sm:w-80 max-w-[85vw] bg-[#0F1420] border-r border-[#1F2C42] flex flex-col justify-between
+        transform transition-transform duration-300 ease-in-out
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+      >
         {/* Top Header & Search */}
         <div className="p-4 border-b border-[#1F2C42]/70">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-bold flex items-center gap-2 text-slate-100">
               <FolderClosed size={18} className="text-indigo-400" /> Knowledge Base
             </h2>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              disabled={isUploading}
-              className="flex items-center gap-1.5 text-xs bg-[#172033] hover:bg-[#222E47] disabled:opacity-50 text-indigo-300 border border-[#1F2C42] px-2.5 py-1.5 rounded-lg transition font-medium shadow-sm active:scale-95"
-            >
-              {isUploading ? <Loader2 size={14} className="animate-spin" /> : <Plus size={14} />} 
-              Add
-            </button>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={DEMO_MODE || isUploading}
+                title={DEMO_MODE ? "Uploads are disabled in demo mode" : "Add documents"}
+                className="flex items-center gap-1.5 text-xs bg-[#172033] hover:bg-[#222E47] disabled:opacity-50 disabled:cursor-not-allowed text-indigo-300 border border-[#1F2C42] px-2.5 py-1.5 rounded-lg transition font-medium shadow-sm active:scale-95"
+              >
+                {isUploading ? <Loader2 size={14} className="animate-spin" /> : <Plus size={14} />}
+                Add
+              </button>
+              {/* Close button — mobile only */}
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="md:hidden p-1.5 text-slate-400 hover:text-slate-200 hover:bg-[#172033] rounded-lg transition"
+                title="Close sidebar"
+              >
+                <PanelLeftClose size={16} />
+              </button>
+            </div>
             <input
               type="file"
               multiple
@@ -397,6 +425,13 @@ export default function PersonalRAG() {
             />
           </div>
 
+          {DEMO_MODE && (
+            <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-[11px] text-amber-200">
+              <Info size={15} className="mt-0.5 shrink-0 text-amber-400" />
+              <span>File uploads are disabled for demo purposes. This demo uses the preloaded sample document.</span>
+            </div>
+          )}
+
           {/* Search bar */}
           <div className="relative">
             <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
@@ -408,7 +443,7 @@ export default function PersonalRAG() {
               className="w-full bg-[#172033] border border-[#1F2C42] rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 transition"
             />
           </div>
-          
+
           <div className="flex items-center justify-between mt-2 px-1">
             <span className="text-[11px] text-slate-400">
               {documents.length} document{documents.length !== 1 ? "s" : ""} indexed
@@ -423,7 +458,7 @@ export default function PersonalRAG() {
 
         {/* Scrollable Document List */}
         <div className="flex-1 overflow-y-auto p-3 space-y-2">
-          
+
           {/* 🚀 Active Uploading Animation Card */}
           {isUploading && (
             <div className="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/50 animate-pulse space-y-2">
@@ -456,8 +491,8 @@ export default function PersonalRAG() {
             >
               <div className="flex items-center gap-2.5 overflow-hidden">
                 <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border uppercase tracking-wider ${getBadgeColor(doc.extension)}`}>
-  {doc.extension}
-</span>
+                  {doc.extension}
+                </span>
                 <div className="truncate">
                   <p className="text-xs font-medium truncate text-slate-200" title={doc.name}>
                     {doc.name}
@@ -509,12 +544,21 @@ export default function PersonalRAG() {
       </aside>
 
       {/* 💬 MAIN CHAT AREA */}
-      <main className="flex-1 flex flex-col h-full relative overflow-hidden">
-        
+      <main className="flex-1 flex flex-col h-full relative overflow-hidden min-w-0">
+
         {/* Top Header */}
-        <header className="px-6 py-3.5 border-b border-[#1F2C42] flex items-center justify-between bg-[#0A0D14]/80 backdrop-blur-sm z-10">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-indigo-600/10 border border-indigo-500/20">
+        <header className="px-4 sm:px-6 py-3.5 border-b border-[#1F2C42] flex items-center justify-between bg-[#0A0D14]/80 backdrop-blur-sm z-10">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            {/* ☰ Sidebar toggle — mobile only */}
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="md:hidden p-1.5 -ml-1 text-slate-300 hover:text-white hover:bg-[#172033] rounded-lg transition shrink-0"
+              title="Open knowledge base"
+            >
+              <Menu size={20} />
+            </button>
+
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center bg-indigo-600/10 border border-indigo-500/20 shrink-0">
               <img
                 src="/logo.png"
                 alt="Logo"
@@ -525,7 +569,7 @@ export default function PersonalRAG() {
                 }}
               />
             </div>
-            <h1 className="text-base font-bold text-slate-100 tracking-tight">
+            <h1 className="text-sm sm:text-base font-bold text-slate-100 tracking-tight truncate">
               {APP_NAME}
             </h1>
           </div>
@@ -533,30 +577,30 @@ export default function PersonalRAG() {
           {isThinking && (
             <button
               onClick={handleStop}
-              className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-red-500/15 border border-red-500/40 text-red-300 hover:bg-red-500/25 rounded-lg transition active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-red-500/15 border border-red-500/40 text-red-300 hover:bg-red-500/25 rounded-lg transition active:scale-95 shrink-0"
             >
-              <Square size={11} className="fill-red-400 text-red-400" /> Stop Generating
+              <Square size={11} className="fill-red-400 text-red-400" /> <span className="hidden sm:inline">Stop Generating</span>
             </button>
           )}
         </header>
 
         {/* Message Container */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
-          
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+
           {/* Welcome Screen with 2x2 Quick Prompts Grid */}
           {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center max-w-2xl mx-auto text-center px-4">
+            <div className="h-full flex flex-col items-center justify-center max-w-2xl mx-auto text-center px-2 sm:px-4">
               <div className="p-3.5 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl mb-4 text-indigo-400 shadow-lg shadow-indigo-500/5">
                 <Sparkles size={34} />
               </div>
-              <h2 className="text-2xl font-bold text-slate-100 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight">
                 How can I help you today?
               </h2>
               <p className="text-xs text-slate-400 max-w-md mt-2 mb-8 leading-relaxed">
                 Ask questions across your documents, synthesize notes, or target specific files with <span className="text-indigo-400 font-mono">@filename</span>.
               </p>
 
-              {/* 2x2 Grid of Quick Actions */}
+              {/* 2x2 Grid of Quick Actions (stacks to 1 column on mobile) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
                 {QUICK_PROMPTS.map((item, idx) => (
                   <button
@@ -585,9 +629,9 @@ export default function PersonalRAG() {
                     <Bot size={17} />
                   </div>
                 )}
-                
+
                 <div
-                  className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`max-w-[85%] sm:max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === "user"
                       ? "bg-indigo-600 text-white rounded-br-sm shadow-md"
                       : "bg-[#172033] border border-[#1F2C42] text-slate-200 rounded-bl-sm shadow-sm prose prose-invert prose-sm max-w-none"
@@ -625,7 +669,7 @@ export default function PersonalRAG() {
 
         {/* Attached Files Chips */}
         {attachedFiles.length > 0 && (
-          <div className="px-6 pb-2 flex gap-2 flex-wrap">
+          <div className="px-4 sm:px-6 pb-2 flex gap-2 flex-wrap">
             {attachedFiles.map((file, i) => (
               <span
                 key={i}
@@ -645,7 +689,7 @@ export default function PersonalRAG() {
 
         {/* @ Mention Suggestion Popover */}
         {showMentions && mentionFilteredDocs.length > 0 && (
-          <div className="absolute bottom-20 left-6 z-50 w-80 bg-[#172033] border border-[#1F2C42] rounded-xl shadow-2xl overflow-hidden backdrop-blur-md">
+          <div className="absolute bottom-20 left-4 sm:left-6 right-4 sm:right-auto z-50 sm:w-80 bg-[#172033] border border-[#1F2C42] rounded-xl shadow-2xl overflow-hidden backdrop-blur-md">
             <div className="p-2.5 text-[11px] font-semibold text-slate-400 border-b border-[#1F2C42] bg-[#0F1420]/60">
               Mention document to filter search:
             </div>
@@ -670,14 +714,20 @@ export default function PersonalRAG() {
             e.preventDefault();
             handleSend();
           }}
-          className="p-4 border-t border-[#1F2C42] bg-[#0F1420]"
+          className="p-3 sm:p-4 border-t border-[#1F2C42] bg-[#0F1420]"
         >
           <div className="flex items-center gap-2 bg-[#172033] border border-[#1F2C42] rounded-2xl px-3 py-2.5 focus-within:border-indigo-500 transition shadow-inner">
-            <label className="cursor-pointer text-slate-400 hover:text-indigo-400 transition p-1 rounded-lg hover:bg-[#222E47]">
+            <label
+              className={`cursor-pointer text-slate-400 hover:text-indigo-400 transition p-1 rounded-lg hover:bg-[#222E47] shrink-0 ${
+                DEMO_MODE ? "cursor-not-allowed opacity-40 hover:text-slate-400" : ""
+              }`}
+              title={DEMO_MODE ? "Attachments are disabled in demo mode" : "Attach files"}
+            >
               <Paperclip size={18} />
               <input
                 type="file"
                 multiple
+                disabled={DEMO_MODE}
                 className="hidden"
                 accept=".pdf,.txt,.docx,.md"
                 onChange={(e) => {
@@ -694,7 +744,7 @@ export default function PersonalRAG() {
               value={input}
               onChange={handleInputChange}
               placeholder="Ask about your documents — use @filename to focus on one file..."
-              className="flex-1 bg-transparent text-sm focus:outline-none text-slate-100 placeholder:text-slate-500"
+              className="flex-1 min-w-0 bg-transparent text-sm focus:outline-none text-slate-100 placeholder:text-slate-500"
               disabled={isThinking}
             />
 
@@ -702,17 +752,17 @@ export default function PersonalRAG() {
               <button
                 type="button"
                 onClick={handleStop}
-                className="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition"
+                className="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition shrink-0"
               >
-                <Square size={12} className="fill-red-400" /> Stop
+                <Square size={12} className="fill-red-400" /> <span className="hidden sm:inline">Stop</span>
               </button>
             ) : (
               <button
                 type="submit"
                 disabled={!input.trim() && attachedFiles.length === 0}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white px-4 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
+                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white px-4 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition shadow-sm shrink-0"
               >
-                <Send size={13} /> Send
+                <Send size={13} /> <span className="hidden sm:inline">Send</span>
               </button>
             )}
           </div>
