@@ -547,7 +547,7 @@ export default function PersonalRAG() {
       <main className="flex-1 flex flex-col h-full relative overflow-hidden min-w-0">
 
         {/* Top Header */}
-        <header className="px-4 sm:px-6 py-3.5 border-b border-[#1F2C42] flex items-center justify-between bg-[#0A0D14]/80 backdrop-blur-sm z-10">
+        <header className="sticky top-0 px-4 sm:px-6 py-3.5 border-b border-[#1F2C42] flex items-center justify-between bg-[#0A0D14]/90 backdrop-blur-sm z-20">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {/* ☰ Sidebar toggle — mobile only */}
             <button
