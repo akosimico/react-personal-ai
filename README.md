@@ -78,7 +78,7 @@ Developed a Retrieval-Augmented Generation (RAG) workspace that processes user d
 
 **1. Clone the repository**
 
-git clone [https://github.com/akosimico/your-repo-name.git](https://github.com/akosimico/your-repo-name.git)
+git clone [https://github.com/akosimico/react-personal-ai.git](https://github.com/akosimico/react-personal-ai.git)
 cd your-repo-name 
 
 2. Setup Backend (FastAPI)
